@@ -26,7 +26,7 @@ jobs:
       - name: Build & Push IAM
         uses: docker/build-push-action@v5
         with:
-          context: ./identity_access_management
+          context: ./learning_management_engine_v2
           push: true
           tags: |
             mfsdaplusregistry.azurecr.io/sda/lme:latest
