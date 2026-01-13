@@ -1,0 +1,37 @@
+# uv lock
+uv.lock
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Compiled/optimized Python files
+*.pyd
+
+# Distribution / packaging
+.eggs/
+develop-eggs/
+dist/
+build/
+wheels/
+sdist/
+*.egg-info/
+.installed.cfg
+*.whl
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+~$*
+
+# Environment-specific files
+.env
+venv/
+env/
+ENV/
+pyvenv.cfg

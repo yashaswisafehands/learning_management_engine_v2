@@ -1,0 +1,142 @@
+{
+  "continents": {
+    "AF": "Africa",
+    "AN": "Antarctica",
+    "AS": "Asia",
+    "EU": "Europe",
+    "NA": "North America",
+    "OC": "Oceania",
+    "SA": "South America"
+  },
+  "countries": {
+    "AD": {
+      "name": "Andorra",
+      "native": "Andorra",
+      "phone": "376",
+      "continent": "EU",
+      "capital": "Andorra la Vella",
+      "currency": "EUR",
+      "languages": "ca",
+      "numeric": "020"
+    },
+    "AE": {
+      "name": "United Arab Emirates",
+      "native": "دولة الإمارات العربية المتحدة",
+      "phone": "971",
+      "continent": "AS",
+      "capital": "Abu Dhabi",
+      "currency": "AED",
+      "languages": "ar",
+      "numeric": "784"
+    },
+    "AF": {
+      "name": "Afghanistan",
+      "native": "افغانستان",
+      "phone": "93",
+      "continent": "AS",
+      "capital": "Kabul",
+      "currency": "AFN",
+      "languages": "ps,uz,tk",
+      "numeric": "004",
+      "regions": [
+        {
+          "name": "Capital",
+          "native": "مرکزی حوزه",
+          "districts": [
+            { "name": "Kapisa", "native": "کاپیسا" },
+            { "name": "Panjsher", "native": "پنجشیر" },
+            { "name": "Kabul", "native": "کابل" },
+            { "name": "Maidan Wardak", "native": "میدان وردک" },
+            { "name": "Logar", "native": "لوگر" },
+            { "name": "Parwan", "native": "پروان" }
+          ]
+        }
+      ]
+    },
+    "AG": {
+      "name": "Antigua and Barbuda",
+      "native": "Antigua and Barbuda",
+      "phone": "1268",
+      "continent": "NA",
+      "capital": "Saint John's",
+      "currency": "XCD",
+      "languages": "en",
+      "numeric": "028"
+    },
+    "AI": {
+      "name": "Anguilla",
+      "native": "Anguilla",
+      "phone": "1264",
+      "continent": "NA",
+      "capital": "The Valley",
+      "currency": "XCD",
+      "languages": "en",
+      "numeric": "660"
+    },
+    "IN": {
+      "name": "India",
+      "native": "भारत",
+      "phone": "91",
+      "continent": "AS",
+      "capital": "New Delhi",
+      "currency": "INR",
+      "languages": "hi,en",
+      "numeric": "356",
+      "regions": [
+        {
+          "name": "North India",
+          "native": "उत्तर भारत",
+          "districts": [
+            { "name": "Delhi", "native": "दिल्ली" },
+            { "name": "Haryana", "native": "हरियाणा" },
+            { "name": "Uttar Pradesh", "native": "उत्तर प्रदेश" },
+            { "name": "Punjab", "native": "पंजाब" },
+            { "name": "Uttarakhand", "native": "उत्तराखंड" }
+          ]
+        },
+        {
+          "name": "South India",
+          "native": "दक्षिण भारत",
+          "districts": [
+            { "name": "Tamil Nadu", "native": "तमिलनाडु" },
+            { "name": "Kerala", "native": "केरल" },
+            { "name": "Andhra Pradesh", "native": "आंध्र प्रदेश" },
+            { "name": "Karnataka", "native": "कर्नाटक" },
+            { "name": "Telangana", "native": "तेलंगाना" }
+          ]
+        },
+        {
+          "name": "West India",
+          "native": "पश्चिम भारत",
+          "districts": [
+            { "name": "Maharashtra", "native": "महाराष्ट्र" },
+            { "name": "Rajasthan", "native": "राजस्थान" },
+            { "name": "Gujarat", "native": "गुजरात" },
+            { "name": "Goa", "native": "गोवा" }
+          ]
+        },
+        {
+          "name": "East India",
+          "native": "पूर्वी भारत",
+          "districts": [
+            { "name": "Bihar", "native": "बिहार" },
+            { "name": "Jharkhand", "native": "झारखंड" },
+            { "name": "Odisha", "native": "ओडिशा" },
+            { "name": "West Bengal", "native": "पश्चिम बंगाल" }
+          ]
+        },
+        {
+          "name": "North East India",
+          "native": "पूर्वोत्तर भारत",
+          "districts": [
+            { "name": "Assam", "native": "असम" },
+            { "name": "Meghalaya", "native": "मेघालय" },
+            { "name": "Manipur", "native": "मणिपुर" },
+            { "name": "Nagaland", "native": "नागालैंड" },
+            { "name": "Tripura", "native": "त्रिपुरा" }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,89 @@
+name: Security & Vulnerability Scan
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    outputs:
+      has-failures: ${{ steps.failure-flag.outputs.has-failures }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.13.2
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13.2'
+
+      - name: Set default failure flag
+        id: failure-flag
+        run: echo "has-failures=false" >> "$GITHUB_OUTPUT"
+
+      - name: Gitleaks - Detect Secrets
+        id: gitleaks
+        continue-on-error: true
+        run: |
+          wget -q https://github.com/gitleaks/gitleaks/releases/download/v8.21.2/gitleaks_8.21.2_linux_x64.tar.gz
+          tar -xzf gitleaks_8.21.2_linux_x64.tar.gz
+          if ! ./gitleaks detect --report-format json --report-path gitleaks-report.json; then
+            echo "has-failures=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run Bandit for Python security issues
+        id: bandit
+        continue-on-error: true
+        run: |
+          pip install bandit jq
+          bandit -r ./ -f json -o bandit-report.json --severity-level=medium
+          if jq '.results | length > 0' bandit-report.json | grep true; then
+            echo "has-failures=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Lint .env files
+        id: dotenv
+        uses: dotenv-linter/action-dotenv-linter@v2
+        continue-on-error: true
+
+      - name: Check dotenv result
+        continue-on-error: true
+        run: |
+          if [[ "${{ steps.dotenv.outcome }}" == "failure" ]]; then
+            echo "has-failures=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install dependencies from pyproject.toml using uv
+        continue-on-error: true
+        run: |
+          pip install uv
+          uv sync
+
+      - name: Check dependencies for known vulnerabilities (Safety)
+        id: safety
+        continue-on-error: true
+        run: |
+          pip install safety
+          if ! safety check --full-report --json > safety-report.json; then
+            echo "has-failures=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload security scan reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-reports
+          path: ./*.json
+
+      - name: Fail job if security issues found
+        if: always()
+        run: |
+          if [[ "${{ steps.failure-flag.outputs.has-failures }}" == "true" ]]; then
+            echo "❌ Security scan failed - issues found!"
+            exit 1
+          else
+            echo "✅ All security checks passed!"
+          fi
