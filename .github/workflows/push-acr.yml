@@ -4,30 +4,52 @@ on:
   push:
     branches:
       - release
+  pull_request:
+    branches:
+      - release
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+      - run: |
+          pwd
+          ls -la
 
-      - name: Login to Azure Container Registry
-        uses: docker/login-action@v3
+      - run: |
+          find . -maxdepth 4 -type d
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
         with:
           registry: mfsdaplusregistry.azurecr.io
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
-      - name: Build & Push IAM
-        uses: docker/build-push-action@v5
+      - uses: docker/build-push-action@v5
         with:
-          context: ./learning_management_engine
+          context: ./sda_svc/identity_access_management
+          push: true
+          tags: |
+            mfsdaplusregistry.azurecr.io/sda/iam:latest
+            mfsdaplusregistry.azurecr.io/sda/iam:${{ github.sha }}
+
+      - uses: docker/build-push-action@v5
+        with:
+          context: ./sda_svc/learning_management_engine
           push: true
           tags: |
             mfsdaplusregistry.azurecr.io/sda/lme:latest
             mfsdaplusregistry.azurecr.io/sda/lme:${{ github.sha }}
+
+      - uses: docker/build-push-action@v5
+        with:
+          context: ./sda_svc/events_and_notifications_system
+          push: true
+          tags: |
+            mfsdaplusregistry.azurecr.io/sda/events:latest
+            mfsdaplusregistry.azurecr.io/sda/events:${{ github.sha }}
