@@ -16,7 +16,7 @@ jobs:
 
       - uses: docker/login-action@v3
         with:
-          registry: mfsdaplusregistry.azurecr.io
+          registry: mfsda.azurecr.io
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
@@ -25,5 +25,5 @@ jobs:
           context: .
           push: true
           tags: |
-            mfsdaplusregistry.azurecr.io/sda/lme:latest
-            mfsdaplusregistry.azurecr.io/sda/lme:${{ github.sha }}
+            mfsda.azurecr.io/lme:latest
+            mfsda.azurecr.io/lme:${{ github.sha }}
